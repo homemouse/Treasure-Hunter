@@ -3103,7 +3103,7 @@ MonoBehaviour:
   jump: 0
   jumpForce: 20
   SlidingTimer: 0
-  SlidingDelays: 0.2
+  SlidingDelays: 0.3
   floorTimer: 0
   floorDelays: 0.5
   wallTimer: 0
