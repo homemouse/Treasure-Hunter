@@ -208,7 +208,7 @@ public class PlayerCtrl : MonoBehaviour
             if (moveX < -0.1f)
             {
                 //rigidbody2D.velocity = (new Vector2((moveX * airMoveSpeed), rigidbody2D.velocity.y));
-                if(rigidbody2D.velocity.x > airMoveSpeed) 
+                if(rigidbody2D.velocity.x > -airMoveSpeed) 
                     rigidbody2D.AddForce(new Vector2(-airMoveSpeed, 0));
             }
             if (moveX > 0.1f)
