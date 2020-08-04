@@ -34,6 +34,7 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Attack Property")]
     [SerializeField] float demage = 1;
     [SerializeField] float attackRange = 1f;
+    [SerializeField] float attackRebound = 0.2f;
     [SerializeField] float attackDelays = 0.5f;
     [SerializeField] float attackTimer = 0f;
     [SerializeField] LayerMask enemyLayers;
@@ -226,9 +227,9 @@ public class PlayerCtrl : MonoBehaviour
             //rigidbody2D.AddForce(transform.TransformVector(new Vector2(-15f, 0f)), ForceMode2D.Impulse);
             //rigidbody2D.velocity = transform.TransformVector(new Vector2(-35f, 0f));
             if (this.transform.localScale.x > 0f)
-                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x -0.2f, rigidbody2D.position.y));
+                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x - attackRebound, rigidbody2D.position.y));
             else
-                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x + 0.2f, rigidbody2D.position.y));
+                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x + attackRebound, rigidbody2D.position.y));
 
             if (enemyHealth != null)
             {
