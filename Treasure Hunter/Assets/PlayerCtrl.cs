@@ -18,7 +18,7 @@ public class PlayerCtrl : MonoBehaviour
 
     [Header("Rigidbody2D Property")]
     [SerializeField] float moveSpeed = 10;
-    [SerializeField] float airMoveSpeed = 5;
+    [SerializeField] float airMoveSpeed = 10;
     [SerializeField] float moveX = 0;
     [SerializeField] float moveY = 0;
     [SerializeField] float jump;
@@ -206,10 +206,17 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
             if (moveX < -0.1f)
-                rigidbody2D.AddForce(new Vector2(-airMoveSpeed, 0));
-
+            {
+                //rigidbody2D.velocity = (new Vector2((moveX * airMoveSpeed), rigidbody2D.velocity.y));
+                if(rigidbody2D.velocity.x > airMoveSpeed) 
+                    rigidbody2D.AddForce(new Vector2(-airMoveSpeed, 0));
+            }
             if (moveX > 0.1f)
-                rigidbody2D.AddForce(new Vector2(airMoveSpeed, 0));
+            {
+                //rigidbody2D.velocity = (new Vector2((moveX * airMoveSpeed), rigidbody2D.velocity.y));
+                if (rigidbody2D.velocity.x < airMoveSpeed)
+                    rigidbody2D.AddForce(new Vector2(airMoveSpeed, 0));
+            }
         }
 
         return true;

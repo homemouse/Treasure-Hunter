@@ -3072,7 +3072,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 01d5a6957d6a571498e7efedde7e1941, type: 2}
+  m_Material: {fileID: 6200000, guid: 7d283df7fd082dd4699f54b452190270, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -3110,7 +3110,8 @@ MonoBehaviour:
   wallDelays: 0.5
   canAirRoll: 0
   demage: 1
-  attackRange: 1
+  attackRange: 0.7
+  attackRebound: 0.2
   attackDelays: 0.5
   attackTimer: 0
   enemyLayers:
@@ -4405,6 +4406,7 @@ MonoBehaviour:
   canAirRoll: 0
   demage: 1
   attackRange: 1
+  attackRebound: 0.2
   attackDelays: 2
   attackTimer: 0
   enemyLayers:
@@ -25100,7 +25102,6 @@ GameObject:
   - component: {fileID: 2036894020}
   - component: {fileID: 2036894019}
   - component: {fileID: 2036894018}
-  - component: {fileID: 2036894021}
   m_Layer: 12
   m_Name: Medieval_props_free_0 (2)
   m_TagString: Untagged
@@ -25217,19 +25218,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2036894021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036894016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96ab43b9ebf60c240943c9579f620c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 302027069}
 --- !u!95 &2043809610
 Animator:
   serializedVersion: 3
@@ -39206,7 +39194,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
