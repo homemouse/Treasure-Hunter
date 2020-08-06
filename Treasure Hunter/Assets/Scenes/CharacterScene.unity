@@ -3098,6 +3098,8 @@ MonoBehaviour:
   isWall: 0
   moveSpeed: 10
   airMoveSpeed: 13
+  airDownSpeed: -30
+  wallDownSpeed: -5
   moveX: 0
   moveY: 0
   jump: 0
@@ -4393,6 +4395,8 @@ MonoBehaviour:
   isWall: 0
   moveSpeed: 10
   airMoveSpeed: 5
+  airDownSpeed: -30
+  wallDownSpeed: -5
   moveX: 0
   moveY: 0
   jump: 0
@@ -21722,7 +21726,7 @@ PrefabInstance:
     - target: {fileID: 6870759958379050150, guid: 94d4fd79c4f84d847ae47b686c7d1d00,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.712475
+      value: 14.53
       objectReference: {fileID: 0}
     - target: {fileID: 6870759958379050150, guid: 94d4fd79c4f84d847ae47b686c7d1d00,
         type: 3}
