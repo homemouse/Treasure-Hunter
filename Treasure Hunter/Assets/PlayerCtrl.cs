@@ -19,6 +19,8 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Rigidbody2D Property")]
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float airMoveSpeed = 10;
+    [SerializeField] float airDownSpeed = -30f;
+    [SerializeField] float wallDownSpeed = -5f;
     [SerializeField] float moveX = 0;
     [SerializeField] float moveY = 0;
     [SerializeField] float jump;
@@ -153,9 +155,9 @@ public class PlayerCtrl : MonoBehaviour
         if (isWall && jump >= 1f)
         {
             if (this.transform.localScale.x > 0f)
-                rigidbody2D.AddForce(new Vector2(-jumpForce / 2, (float)(jumpForce * 1.3)), ForceMode2D.Impulse);
+                rigidbody2D.AddForce(new Vector2(-jumpForce / 4, (float)(jumpForce * 1.3)), ForceMode2D.Impulse);
             else
-                rigidbody2D.AddForce(new Vector2(jumpForce / 2, (float)(jumpForce * 1.3)), ForceMode2D.Impulse);
+                rigidbody2D.AddForce(new Vector2(jumpForce / 4, (float)(jumpForce * 1.3)), ForceMode2D.Impulse);
             isFloor = false;
             isWall = false;
             floorTimer = 0f;
@@ -164,6 +166,15 @@ public class PlayerCtrl : MonoBehaviour
 
         //攻擊
         playerAttack(isAttack, attackPoint, attackRange, enemyLayers);
+
+        //限制下降速度
+        if (rigidbody2D.velocity.y < airDownSpeed)
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, airDownSpeed);
+        if (isWall && (Mathf.Abs(moveX) >= 1f) && rigidbody2D.velocity.y < wallDownSpeed)
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, wallDownSpeed);
+
+        }
 
         //跳躍偵測器判定
         if (isFloor == false && floorTimer <= floorDelays)
@@ -209,13 +220,13 @@ public class PlayerCtrl : MonoBehaviour
             {
                 //rigidbody2D.velocity = (new Vector2((moveX * airMoveSpeed), rigidbody2D.velocity.y));
                 if(rigidbody2D.velocity.x > -airMoveSpeed) 
-                    rigidbody2D.AddForce(new Vector2(-airMoveSpeed, 0));
+                    rigidbody2D.AddForce(new Vector2(-airMoveSpeed * 0.1f, 0));
             }
             if (moveX > 0.1f)
             {
                 //rigidbody2D.velocity = (new Vector2((moveX * airMoveSpeed), rigidbody2D.velocity.y));
                 if (rigidbody2D.velocity.x < airMoveSpeed)
-                    rigidbody2D.AddForce(new Vector2(airMoveSpeed, 0));
+                    rigidbody2D.AddForce(new Vector2(airMoveSpeed * 0.1f, 0));
             }
         }
 
@@ -234,9 +245,9 @@ public class PlayerCtrl : MonoBehaviour
             //rigidbody2D.AddForce(transform.TransformVector(new Vector2(-15f, 0f)), ForceMode2D.Impulse);
             //rigidbody2D.velocity = transform.TransformVector(new Vector2(-35f, 0f));
             if (this.transform.localScale.x > 0f)
-                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x - attackRebound, rigidbody2D.position.y));
+                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x - (float)(attackRebound * 0.1f), rigidbody2D.position.y));
             else
-                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x + attackRebound, rigidbody2D.position.y));
+                rigidbody2D.MovePosition(new Vector2(rigidbody2D.position.x + (float)(attackRebound * 0.1f), rigidbody2D.position.y));
 
             if (enemyHealth != null)
             {
