@@ -258,6 +258,15 @@ public class PlayerCtrl : MonoBehaviour
         this.isAttack = false;
     }
 
+    //IEnumerator JumpOff()
+    //{
+    //    jumpOffCoroutineIsRunning = true;
+    //    Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, true);
+    //    yield return new WaitForSeconds(0.5f);
+    //    Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
+    //    jumpOffCoroutineIsRunning = false;
+    //}
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
