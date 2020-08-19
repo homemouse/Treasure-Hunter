@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -41,6 +42,10 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float attackTimer = 0f;
     [SerializeField] LayerMask enemyLayers;
 
+    [Header("Platform Property")]
+    [SerializeField] int playerLayerMask = 0;
+    [SerializeField] float platformDownDelay = 0.3f;
+
     [Header("Point")]
     [SerializeField] GameObject floorChecker;
     [SerializeField] GameObject wallChecker;
@@ -55,7 +60,7 @@ public class PlayerCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerLayerMask = 1 << this.gameObject.layer;
     }
 
     // Update is called once per frame
@@ -167,6 +172,24 @@ public class PlayerCtrl : MonoBehaviour
         //攻擊
         playerAttack(isAttack, attackPoint, attackRange, enemyLayers);
 
+        //平台下跳
+        if (Input.GetKey(KeyCode.S))
+        {
+            Collider2D[] allstuff = Physics2D.OverlapCircleAll(floorChecker.transform.position, 0.1f, floorLayers);
+            foreach (Collider2D stuff in allstuff)
+            {
+                PlatformEffector2D PE2D = stuff.GetComponent<PlatformEffector2D>();
+                if (PE2D == null)
+                    continue;
+                int rioMask = PE2D.colliderMask;
+                PE2D.colliderMask &= ~(playerLayerMask);
+
+                int resMask = PE2D.colliderMask;
+                Debug.Log("rioMask: " + Convert.ToString(rioMask, 2) + " resMask: " + Convert.ToString(resMask, 2) + " playerLayer:" + Convert.ToString(playerLayerMask, 2));
+                StartCoroutine(platformNoDown(PE2D, platformDownDelay));
+            }
+        }
+
         //限制下降速度
         if (rigidbody2D.velocity.y < airDownSpeed)
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, airDownSpeed);
@@ -258,8 +281,24 @@ public class PlayerCtrl : MonoBehaviour
         this.isAttack = false;
     }
 
+    //IEnumerator JumpOff()
+    //{
+    //    jumpOffCoroutineIsRunning = true;
+    //    Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, true);
+    //    yield return new WaitForSeconds(0.5f);
+    //    Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
+    //    jumpOffCoroutineIsRunning = false;
+    //}
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+    }
+
+    IEnumerator platformNoDown(PlatformEffector2D PE2D, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PE2D.colliderMask |= playerLayerMask;
+        Debug.Log("OK");
     }
 }

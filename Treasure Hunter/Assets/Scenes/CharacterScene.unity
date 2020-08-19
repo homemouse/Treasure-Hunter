@@ -3011,10 +3011,10 @@ GameObject:
   m_Component:
   - component: {fileID: 354552953}
   - component: {fileID: 354552955}
-  - component: {fileID: 354552954}
   - component: {fileID: 354552956}
   - component: {fileID: 354552957}
   - component: {fileID: 354552958}
+  - component: {fileID: 354552954}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -3040,8 +3040,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &354552954
-CapsuleCollider2D:
+--- !u!61 &354552954
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3049,13 +3049,23 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 354552952}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7d283df7fd082dd4699f54b452190270, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.2}
-  m_Size: {x: 0.68, y: 1.81}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.84}
+  m_EdgeRadius: 0
 --- !u!50 &354552955
 Rigidbody2D:
   serializedVersion: 4
@@ -3119,6 +3129,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 1024
+  playerLayerMask: 0
+  platformDownDelay: 0.5
   floorChecker: {fileID: 1216220547}
   wallChecker: {fileID: 490955218}
   attackPoint: {fileID: 1341838500}
@@ -4416,6 +4428,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
+  playerLayerMask: 0
+  platformDownDelay: 0.5
   floorChecker: {fileID: 48155974}
   wallChecker: {fileID: 1761137616}
   attackPoint: {fileID: 0}
@@ -4789,7 +4803,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579819955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.09, y: 10.5, z: 29.257812}
+  m_LocalPosition: {x: 6.49, y: 10.5, z: 29.257812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 903361186}
@@ -39008,6 +39022,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 701777927}
     m_Modifications:
+    - target: {fileID: 6870759958379050145, guid: 94d4fd79c4f84d847ae47b686c7d1d00,
+        type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 6870759958379050148, guid: 94d4fd79c4f84d847ae47b686c7d1d00,
         type: 3}
       propertyPath: m_Name
