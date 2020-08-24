@@ -292,7 +292,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+        if (attackPoint != null)
+            Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
 
     IEnumerator platformNoDown(PlatformEffector2D PE2D, float delay)
