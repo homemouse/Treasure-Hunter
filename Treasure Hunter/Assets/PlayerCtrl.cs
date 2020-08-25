@@ -34,6 +34,11 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float wallDelays = 0.5f;
     [SerializeField] bool canAirRoll = false;
 
+    [Header("colliderWide Property")]
+    [SerializeField] BoxCollider2D boxCollider2D;
+    [SerializeField] float colliderWide = 0f;
+    [SerializeField] float colliderHight = 0f;
+
     [Header("Attack Property")]
     [SerializeField] float demage = 1;
     [SerializeField] float attackRange = 1f;
@@ -61,6 +66,8 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         playerLayerMask = 1 << this.gameObject.layer;
+        colliderWide = boxCollider2D.bounds.size.x;
+        colliderHight = boxCollider2D.bounds.size.y;
     }
 
     // Update is called once per frame
@@ -206,12 +213,16 @@ public class PlayerCtrl : MonoBehaviour
         if (floorChecker != null && floorTimer >= floorDelays)
         {
             isFloor = false;
-            Collider2D[] allstuff = Physics2D.OverlapCircleAll(floorChecker.transform.position, 0.1f, floorLayers);
+            //Collider2D[] allstuff = Physics2D.OverlapCircleAll(floorChecker.transform.position, 0.1f, floorLayers);
+            Collider2D[] allstuff = Physics2D.OverlapBoxAll(floorChecker.transform.position, new Vector2(colliderWide, 0.1f), 0f, floorLayers);
+            string str = "";
             foreach (Collider2D stuff in allstuff)
             {
                 isFloor = true;
                 canAirRoll = true;
+                str += stuff.name + ", ";
             }
+            Debug.Log(str);
         }
 
         if (isFloor == false && wallTimer <= wallDelays)

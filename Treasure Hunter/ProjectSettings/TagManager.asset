@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackLayer
+    uniqueID: 2313374037
+    locked: 0
+  - name: PlayerLayer
+    uniqueID: 892132393
+    locked: 0
+  - name: Fore Layer
+    uniqueID: 1214272369
+    locked: 0
+  - name: buildingLayer
+    uniqueID: 2186897273
+    locked: 0
