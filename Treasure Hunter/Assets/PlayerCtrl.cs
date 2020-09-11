@@ -66,7 +66,7 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         playerLayerMask = 1 << this.gameObject.layer;
-        colliderWide = boxCollider2D.bounds.size.x;
+        colliderWide = boxCollider2D.bounds.size.x - 0.1f;
         colliderHight = boxCollider2D.bounds.size.y;
     }
 
@@ -192,7 +192,7 @@ public class PlayerCtrl : MonoBehaviour
                 PE2D.colliderMask &= ~(playerLayerMask);
 
                 int resMask = PE2D.colliderMask;
-                Debug.Log("rioMask: " + Convert.ToString(rioMask, 2) + " resMask: " + Convert.ToString(resMask, 2) + " playerLayer:" + Convert.ToString(playerLayerMask, 2));
+                //Debug.Log("rioMask: " + Convert.ToString(rioMask, 2) + " resMask: " + Convert.ToString(resMask, 2) + " playerLayer:" + Convert.ToString(playerLayerMask, 2));
                 StartCoroutine(platformNoDown(PE2D, platformDownDelay));
             }
         }
@@ -206,7 +206,7 @@ public class PlayerCtrl : MonoBehaviour
 
         }
 
-        //跳躍偵測器判定
+        //跳躍偵測器
         if (isFloor == false && floorTimer <= floorDelays)
             floorTimer += Time.deltaTime;
             
@@ -222,12 +222,13 @@ public class PlayerCtrl : MonoBehaviour
                 canAirRoll = true;
                 str += stuff.name + ", ";
             }
-            Debug.Log(str);
+            //Debug.Log(str);
         }
 
         if (isFloor == false && wallTimer <= wallDelays)
             wallTimer += Time.deltaTime;
-
+       
+        //牆壁偵測器
         if (wallChecker != null && wallTimer >= wallDelays)
         {
             isWall = false;

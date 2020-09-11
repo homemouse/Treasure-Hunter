@@ -8,12 +8,10 @@ public class portalCtrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("W");
             Collider2D[] allstuff = Physics2D.OverlapCircleAll(this.transform.position, 0.1f);
             foreach (Collider2D stuff in allstuff)
             {
                 portalTarget portaltarget = stuff.GetComponent<portalTarget>();
-                Debug.Log(stuff.name);
                 if (portaltarget !=null)
                 {
                     if (portaltarget.target != null)
